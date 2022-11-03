@@ -1,5 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700;900&display=swap');
 
+/* Variaveis */
+:root{
+    --body-color: #121214;
+    --card-bg: #1D1C19;
+    --card-primary: #338AF3;
+    --card-yellow: #F7DD43;
+    --card-border: #746615;    
+    --card-text: #E1E1E6;
+    --divider: #323238;
+    --bg: url(./assets/bg-blue.svg)
+}
+
 *{
     margin: 0;
     padding: 0;
@@ -10,17 +22,26 @@
 /* Content */
 
 body{
-    background-color: #121214;
-    background-image: url(./assets/bg.svg);
+    background-color: var(--body-color);
+    background-image: var(--bg);
     background-position-x: center;
     background-position-y: -715px;
+    background-repeat: no-repeat;
+    background-size: cover;
 
     font-family: 'Roboto', sans-serif;
 }
 
+body.yellow{
+    --card-bg: #1D1C19;
+    --card-primary: #F7DD43;
+    --bg: url(./assets/bg-yellow.svg);
+}
+
 #app{
     width: fit-content;
-    margin: 52px auto;
+    margin: auto;
+    padding-top: 52px;
 }
 
 header{
@@ -35,13 +56,16 @@ header{
 }
 
 .card{
-    background: #1D1C19;
+    background: var(--card-bg);
     
-    border-bottom: 2px solid #338AF3;
+    border-bottom: 2px solid var(--card-primary);
     border-radius: 6px;
     padding: 32px 23px;
 
     text-align: center;
+
+    opacity: 0;
+    animation: appear 0.4s forwards;
 }
 
 .card h2{
@@ -51,9 +75,9 @@ header{
     gap: 16px;
 
     font-size: 24px;
-    color: #F7DD43;
+    color: var(--card-yellow);
 
-    border: 1px solid #746615;
+    border: 1px solid var(--card-border);
     border-radius: 6px;
     padding: 8px 16px;
 
@@ -63,7 +87,7 @@ header{
 }
 
 .card h2 span{
-    color: #E1E1E6;
+    color: var(--card-text);
     font-size: 14px;
     text-transform: uppercase;
 }
@@ -84,13 +108,43 @@ header{
 
 .card ul li + li{
     padding-top: 24px;
-    border-top: 1px solid #323238;
+    border-top: 1px solid var(--divider);
 }
 
 .card ul li strong{
-    color: #E1E1E6;
+    color: var(--card-text);
 
     font-weight: 900;
     font-size: 36px;
     line-height: 125%;
+}
+
+.card ul li strong:hover,
+.card ul li img:hover{
+    transform: scale(1.2);
+}
+
+.card ul li strong,
+.card ul li img{
+    transition: transform 0.3s;
+}
+
+/* Desktop */
+@media(min-width: 700px){
+    #cards{
+        max-width: 670px;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+}
+
+/* Animações */
+@keyframes appear {
+    0%{
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    100%{
+        opacity: 1;
+    }
 }
